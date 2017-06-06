@@ -1,13 +1,14 @@
 CREATE TABLE mutable_entity (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id INT PRIMARY KEY,
   nic VARCHAR,
   dependency_id INT
 );
 CREATE TABLE immutable_entity (
-  id INT AUTO_INCREMENT PRIMARY KEY,
+  id INT PRIMARY KEY,
   nic VARCHAR,
   dependency_id INT
 );
+CREATE SEQUENCE entity_seq;
 CREATE TABLE dependency (
   id INT AUTO_INCREMENT PRIMARY KEY,
   nic VARCHAR

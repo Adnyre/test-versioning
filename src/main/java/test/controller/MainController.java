@@ -38,9 +38,20 @@ public class MainController {
         return dao.makeImmutable(id);
     }
 
+    @PostMapping("/make-mutable")
+    public MutableEntity makeMutable(@RequestParam int id) {
+        return dao.makeMutable(id);
+    }
+
     @GetMapping("/dependencies")
     public List<Dependency> getDependencies() {
         return dao.getDependencies();
+    }
+
+    //for testing
+    @GetMapping("/dependency-snapshots")
+    public List<DependencySnapshot> getDependencySnapshots() {
+        return dao.getDependencySnapshots();
     }
 
     @PostMapping("/dependencies")

@@ -1,13 +1,13 @@
 package test.model;
 
-import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @javax.persistence.Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-@SequenceGenerator(name = "entity_seq")
-public class Entity {
+public class Something {
     @Id
-    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator = "entity_seq")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private int id;
 
     private String nic;
