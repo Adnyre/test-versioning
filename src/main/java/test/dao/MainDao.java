@@ -47,6 +47,12 @@ public class MainDao {
         return query.getResultList();
     }
 
+    //for testing
+    public List<Something> getSomething() {
+        TypedQuery<Something> query = em.createQuery("FROM Something", Something.class);
+        return query.getResultList();
+    }
+
     public Dependency saveDependency(Dependency dependency) {
         em.persist(dependency);
         return dependency;

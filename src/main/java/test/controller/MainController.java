@@ -54,6 +54,12 @@ public class MainController {
         return dao.getDependencySnapshots();
     }
 
+    //for testing
+    @GetMapping("/something")
+    public List<Something> getSomething() {
+        return dao.getSomething();
+    }
+
     @PostMapping("/dependencies")
     public Dependency saveDependency(@RequestBody Dependency dependency) {
         return dao.saveDependency(dependency);
