@@ -3,9 +3,15 @@ package test.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import test.dao.MainDao;
-import test.model.*;
+import test.dto.DependencyDto;
+import test.dto.EntityDto;
+import test.dto.SomethingDto;
+import test.dto.converter.DependencyDtoConverter;
+import test.dto.converter.EntityDtoConverter;
+import test.dto.converter.SomethingDtoConverter;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class MainController {
@@ -14,54 +20,54 @@ public class MainController {
     private MainDao dao;
 
     @GetMapping("/mutable-entities")
-    public List<MutableEntity> getMutableEntities() {
-        return dao.getMutableEntities();
+    public List<EntityDto> getMutableEntities() {
+        return dao.getMutableEntities().stream().map(EntityDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/immutable-entities")
-    public List<ImmutableEntity> getImmutableEntities() {
-        return dao.getImmutableEntities();
+    public List<EntityDto> getImmutableEntities() {
+        return dao.getImmutableEntities().stream().map(EntityDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
     @GetMapping("/entities")
-    public List<Entity> getEntities() {
-        return dao.getEntities();
+    public List<EntityDto> getEntities() {
+        return dao.getEntities().stream().map(EntityDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
     @PostMapping("/mutable-entities")
-    public MutableEntity saveImmutableEntity(@RequestBody MutableEntity entity) {
-        return dao.saveMutableEntity(entity);
+    public EntityDto saveImmutableEntity(@RequestBody EntityDto entity) {
+        return EntityDtoConverter.convertToDto(dao.saveMutableEntity(EntityDtoConverter.convertToMutableEntity(entity)));
     }
 
     @PostMapping("/make-immutable")
-    public ImmutableEntity makeImmutable(@RequestParam int id) {
-        return dao.makeImmutable(id);
+    public EntityDto makeImmutable(@RequestParam int id) {
+        return EntityDtoConverter.convertToDto(dao.makeImmutable(id));
     }
 
     @PostMapping("/make-mutable")
-    public MutableEntity makeMutable(@RequestParam int id) {
-        return dao.makeMutable(id);
+    public EntityDto makeMutable(@RequestParam int id) {
+        return EntityDtoConverter.convertToDto(dao.makeMutable(id));
     }
 
     @GetMapping("/dependencies")
-    public List<Dependency> getDependencies() {
-        return dao.getDependencies();
+    public List<DependencyDto> getDependencies() {
+        return dao.getDependencies().stream().map(DependencyDtoConverter::convertToEntity).collect(Collectors.toList());
     }
 
     //for testing
     @GetMapping("/dependency-snapshots")
-    public List<DependencySnapshot> getDependencySnapshots() {
-        return dao.getDependencySnapshots();
+    public List<DependencyDto> getDependencySnapshots() {
+        return dao.getDependencySnapshots().stream().map(DependencyDtoConverter::convertToEntity).collect(Collectors.toList());
     }
 
     //for testing
     @GetMapping("/something")
-    public List<Something> getSomething() {
-        return dao.getSomething();
+    public List<SomethingDto> getSomething() {
+        return dao.getSomething().stream().map(SomethingDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
     @PostMapping("/dependencies")
-    public Dependency saveDependency(@RequestBody Dependency dependency) {
-        return dao.saveDependency(dependency);
+    public DependencyDto saveDependency(@RequestBody DependencyDto dependency) {
+        return DependencyDtoConverter.convertToEntity(dao.saveDependency(DependencyDtoConverter.convertToEntity(dependency)));
     }
 }
