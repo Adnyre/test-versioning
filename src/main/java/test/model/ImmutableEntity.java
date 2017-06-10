@@ -1,5 +1,7 @@
 package test.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,6 +13,7 @@ public class ImmutableEntity extends Entity {
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "immutable_entity_id")
+    @JsonManagedReference
     private List<Something> something;
 
     public DependencySnapshot getDependency() {
