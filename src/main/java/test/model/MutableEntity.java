@@ -9,7 +9,7 @@ public class MutableEntity extends Entity {
     @JoinColumn(name = "dependency_id")
     private Dependency dependency;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "mutable_entity_id")
     private List<Something> something;
 

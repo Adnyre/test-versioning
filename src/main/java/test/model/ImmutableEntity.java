@@ -9,7 +9,7 @@ public class ImmutableEntity extends Entity {
     @JoinColumn(name = "dependency_id")
     private DependencySnapshot dependency;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "immutable_entity_id")
     private List<Something> something;
 

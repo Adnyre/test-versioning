@@ -39,6 +39,11 @@ public class MainController {
         return EntityDtoConverter.convertToDto(dao.saveMutableEntity(EntityDtoConverter.convertToMutableEntity(entity)));
     }
 
+    @PutMapping("/mutable-entities")
+    public EntityDto updateImmutableEntity(@RequestBody EntityDto entity) {
+        return EntityDtoConverter.convertToDto(dao.updateMutableEntity(EntityDtoConverter.convertToMutableEntity(entity)));
+    }
+
     @PostMapping("/make-immutable")
     public EntityDto makeImmutable(@RequestParam int id) {
         return EntityDtoConverter.convertToDto(dao.makeImmutable(id));

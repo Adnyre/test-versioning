@@ -7,6 +7,7 @@ import test.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -78,7 +79,7 @@ public class MainDao {
         ImmutableEntity immutable = new ImmutableEntity();
         immutable.setNic(mutable.getNic());
         immutable.setDependency(convertToSnapshot(mutable.getDependency()));
-        immutable.setSomething(mutable.getSomething());
+        immutable.setSomething(new ArrayList<>(mutable.getSomething()));
         return immutable;
     }
 
@@ -86,7 +87,7 @@ public class MainDao {
         MutableEntity mutable = new MutableEntity();
         mutable.setNic(immutable.getNic());
         mutable.setDependency(immutable.getDependency().getDependency());
-        mutable.setSomething(immutable.getSomething());
+        mutable.setSomething(new ArrayList<>(immutable.getSomething()));
         return mutable;
     }
 
@@ -95,5 +96,9 @@ public class MainDao {
         snapshot.setNic(dependency.getNic());
         snapshot.setDependency(dependency);
         return snapshot;
+    }
+
+    public MutableEntity updateMutableEntity(MutableEntity entity) {
+        return em.merge(entity);
     }
 }
