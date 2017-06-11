@@ -11,7 +11,7 @@ public class EntityDtoConverter {
         EntityDto dto = new EntityDto();
         dto.setId(entity.getId());
         dto.setNic(entity.getNic());
-        dto.setDependency(DependencyDtoConverter.convertToEntity(entity.getDependency()));
+        dto.setDependency(DependencyDtoConverter.convertToDto(entity.getDependency()));
         dto.setSomething(entity.getSomething().stream().map(SomethingDtoConverter::convertToDto).collect(Collectors.toList()));
         return dto;
     }

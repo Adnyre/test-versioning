@@ -54,25 +54,30 @@ public class MainController {
         return EntityDtoConverter.convertToDto(dao.makeMutable(id));
     }
 
-    @GetMapping("/dependencies")
-    public List<DependencyDto> getDependencies() {
-        return dao.getDependencies().stream().map(DependencyDtoConverter::convertToEntity).collect(Collectors.toList());
-    }
-
-    //for testing
-    @GetMapping("/dependency-snapshots")
-    public List<DependencyDto> getDependencySnapshots() {
-        return dao.getDependencySnapshots().stream().map(DependencyDtoConverter::convertToEntity).collect(Collectors.toList());
-    }
-
     //for testing
     @GetMapping("/something")
     public List<SomethingDto> getSomething() {
         return dao.getSomething().stream().map(SomethingDtoConverter::convertToDto).collect(Collectors.toList());
     }
 
+    @GetMapping("/dependencies")
+    public List<DependencyDto> getDependencies() {
+        return dao.getDependencies().stream().map(DependencyDtoConverter::convertToDto).collect(Collectors.toList());
+    }
+
+    @PutMapping("/dependencies")
+    public DependencyDto updateDependency(@RequestBody DependencyDto dependency) {
+        return DependencyDtoConverter.convertToDto(dao.updateDependency(DependencyDtoConverter.convertToEntity(dependency)));
+    }
+
     @PostMapping("/dependencies")
     public DependencyDto saveDependency(@RequestBody DependencyDto dependency) {
-        return DependencyDtoConverter.convertToEntity(dao.saveDependency(DependencyDtoConverter.convertToEntity(dependency)));
+        return DependencyDtoConverter.convertToDto(dao.saveDependency(DependencyDtoConverter.convertToEntity(dependency)));
+    }
+
+    //for testing
+    @GetMapping("/dependency-snapshots")
+    public List<DependencyDto> getDependencySnapshots() {
+        return dao.getDependencySnapshots().stream().map(DependencyDtoConverter::convertToDto).collect(Collectors.toList());
     }
 }

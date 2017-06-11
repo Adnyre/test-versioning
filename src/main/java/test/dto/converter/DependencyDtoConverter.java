@@ -5,7 +5,7 @@ import test.model.Dependency;
 import test.model.DependencyAbstract;
 
 public class DependencyDtoConverter {
-    public static DependencyDto convertToEntity(DependencyAbstract dependency) {
+    public static DependencyDto convertToDto(DependencyAbstract dependency) {
         DependencyDto dto = new DependencyDto();
         dto.setId(dependency.getId());
         dto.setNic(dependency.getNic());

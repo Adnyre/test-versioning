@@ -8,7 +8,6 @@ public class SomethingDtoConverter {
         SomethingDto dto = new SomethingDto();
         dto.setId(something.getId());
         dto.setNic(something.getNic());
-        dto.setEntity(something.getEntity());
         return dto;
     }
 
@@ -16,7 +15,6 @@ public class SomethingDtoConverter {
         Something entity = new Something();
         entity.setId(dto.getId());
         entity.setNic(dto.getNic());
-        entity.setEntity(dto.getEntity());
         return entity;
     }
 }

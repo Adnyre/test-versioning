@@ -101,4 +101,8 @@ public class MainDao {
     public MutableEntity updateMutableEntity(MutableEntity entity) {
         return em.merge(entity);
     }
+
+    public Dependency updateDependency(Dependency dependency) {
+        return em.merge(dependency);
+    }
 }

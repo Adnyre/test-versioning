@@ -7,8 +7,6 @@ public class SomethingDto {
 
     private String nic;
 
-    private Entity entity;
-
     public int getId() {
         return id;
     }
@@ -23,13 +21,5 @@ public class SomethingDto {
 
     public void setNic(String nic) {
         this.nic = nic;
-    }
-
-    public Entity getEntity() {
-        return entity;
-    }
-
-    public void setEntity(Entity entity) {
-        this.entity = entity;
     }
 }

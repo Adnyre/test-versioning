@@ -7,11 +7,11 @@ import java.util.List;
 
 @javax.persistence.Entity
 public class ImmutableEntity extends Entity {
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "dependency_id")
     private DependencySnapshot dependency;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true) //should still be able to update it
     @JoinColumn(name = "immutable_entity_id")
     @JsonManagedReference
     private List<Something> something;
