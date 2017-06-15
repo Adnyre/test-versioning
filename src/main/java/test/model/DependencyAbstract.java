@@ -6,20 +6,13 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-public class DependencyAbstract {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+public abstract class DependencyAbstract {
 
     private String nic;
 
-    public int getId() {
-        return id;
-    }
+    public abstract int getId();
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public abstract void setId(int id);
 
     public String getNic() {
         return nic;

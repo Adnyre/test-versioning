@@ -14,10 +14,14 @@ public class Something {
     private String nic;
 
     @ManyToOne
-    @JoinFormula(value = "CASE WHEN mutable_entity_id IS NOT NULL THEN mutable_entity_id " +
-    "WHEN immutable_entity_id IS NOT NULL THEN immutable_entity_id END", referencedColumnName = "id")
+    @JoinColumn(name = "mutable_entity_id")
     @JsonBackReference
-    private Entity entity;
+    private MutableEntity mutableEntity;
+
+    @ManyToOne
+    @JoinColumn(name = "immutable_entity_id")
+    @JsonBackReference
+    private ImmutableEntity immutableEntity;
 
     public int getId() {
         return id;
@@ -35,11 +39,19 @@ public class Something {
         this.nic = nic;
     }
 
-    public Entity getEntity() {
-        return entity;
+    public MutableEntity getMutableEntity() {
+        return mutableEntity;
     }
 
-    public void setEntity(Entity entity) {
-        this.entity = entity;
+    public void setMutableEntity(MutableEntity mutableEntity) {
+        this.mutableEntity = mutableEntity;
+    }
+
+    public ImmutableEntity getImmutableEntity() {
+        return immutableEntity;
+    }
+
+    public void setImmutableEntity(ImmutableEntity immutableEntity) {
+        this.immutableEntity = immutableEntity;
     }
 }

@@ -7,6 +7,10 @@ import java.util.List;
 
 @javax.persistence.Entity
 public class MutableEntity extends Entity {
+
+    @Id
+    private int id;
+
     @ManyToOne
     @JoinColumn(name = "dependency_id")
     private Dependency dependency;
@@ -15,6 +19,7 @@ public class MutableEntity extends Entity {
     @JoinColumn(name = "mutable_entity_id")
     @JsonManagedReference
     private List<Something> something;
+
 
     public Dependency getDependency() {
         return dependency;
@@ -30,5 +35,13 @@ public class MutableEntity extends Entity {
 
     public void setSomething(List<Something> something) {
         this.something = something;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -2,12 +2,15 @@ package test.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @javax.persistence.Entity
 public class DependencySnapshot extends DependencyAbstract {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private int id;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "dependency_id")
     @JsonIgnore
@@ -19,5 +22,16 @@ public class DependencySnapshot extends DependencyAbstract {
 
     public void setDependency(Dependency dependency) {
         this.dependency = dependency;
+    }
+
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
     }
 }

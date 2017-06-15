@@ -7,6 +7,10 @@ import java.util.List;
 
 @javax.persistence.Entity
 public class ImmutableEntity extends Entity {
+
+    @Id
+    private int id;
+
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "dependency_id")
     private DependencySnapshot dependency;
@@ -30,5 +34,13 @@ public class ImmutableEntity extends Entity {
 
     public void setSomething(List<Something> something) {
         this.something = something;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
