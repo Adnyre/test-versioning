@@ -6,6 +6,9 @@ import java.util.List;
 @MappedSuperclass
 public abstract class Entity {
 
+    @Id
+    private int id;
+
     private String nic;
 
     public String getNic() {
@@ -22,7 +25,11 @@ public abstract class Entity {
 
     public abstract void setSomething(List<Something> something);
 
-    public abstract int getId();
+    public int getId() {
+        return id;
+    }
 
-    public abstract void setId(int id);
+    public void setId(int id) {
+        this.id = id;
+    }
 }
