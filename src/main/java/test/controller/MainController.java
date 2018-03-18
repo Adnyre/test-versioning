@@ -80,4 +80,9 @@ public class MainController {
     public List<DependencyDto> getDependencySnapshots() {
         return dao.getDependencySnapshots().stream().map(DependencyDtoConverter::convertToDto).collect(Collectors.toList());
     }
+
+    @GetMapping("test")
+    public String test() {
+        return "Ok";
+    }
 }
