@@ -3,6 +3,7 @@ package test.dao;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import test.model.*;
 
 import javax.persistence.EntityManager;
@@ -12,6 +13,7 @@ import javax.persistence.TypedQuery;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class MainDao {
@@ -35,6 +37,14 @@ public class MainDao {
     public List<Entity> getEntities() {
         Query res = em.createQuery("FROM test.model.Entity");
         return (List<Entity>) res.getResultList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Entity> getEntitiesWithoutSomething() {
+        Query res = em.createQuery("FROM test.model.Entity");
+        return (List<Entity>) res.getResultList().stream()
+                .filter(x -> CollectionUtils.isEmpty(((Entity)x).getSomething()))
+                .collect(Collectors.toList());
     }
 
     @Transactional
